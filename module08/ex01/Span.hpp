@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebross <alebross@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/19 18:42:28 by alebross          #+#    #+#             */
-/*   Updated: 2022/01/16 18:58:08 by alebross         ###   ########.fr       */
+/*   Created: 2021/12/19 17:43:24 by alebross          #+#    #+#             */
+/*   Updated: 2021/12/19 22:14:12 by alebross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "iter.hpp"
+#pragma once
+
 #include <iostream>
+#include <vector>
+#include <iterator>
+#include <algorithm>
 
-template <typename T>
-void display(T const & elem){
-	std::cout << elem << std::endl;
-}
+class Span 
+{
+	public:
 
-int main() {
-    int a[4] = {12, 13, 14, 15};
-    std::string s = "abcdefghijklmnopqrstuvwxyz";
-    iter(a, 4, display);
-    std::cout << std::endl;
-    iter(s.c_str(), s.length(), display);
-}
+		void	addNumber(const int i);
+		int		longestSpan(void) const;
+		int		shortestSpan(void) const;
+
+		Span(const unsigned int n);
+		Span(Span const & src);
+		~Span(void);
+		Span&				operator=(Span const & src);
+
+	private:
+
+	unsigned int		_n;
+	std::vector<int>	_v;
+};

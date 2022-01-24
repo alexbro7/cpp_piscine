@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   easyfind.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebross <alebross@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 18:42:28 by alebross          #+#    #+#             */
-/*   Updated: 2022/01/16 18:58:08 by alebross         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:24:06 by alebross         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "iter.hpp"
+#pragma once
 #include <iostream>
 
 template <typename T>
-void display(T const & elem){
-	std::cout << elem << std::endl;
-}
+bool    easyfind(T &container, int n)
+{
+    typename    T::const_iterator i;
 
-int main() {
-    int a[4] = {12, 13, 14, 15};
-    std::string s = "abcdefghijklmnopqrstuvwxyz";
-    iter(a, 4, display);
-    std::cout << std::endl;
-    iter(s.c_str(), s.length(), display);
+    i = std::find(container.begin(), container.end(), n);
+    if (i != container.end())
+        return 1;
+    else
+        return 0;
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                             	            :+:      :+:    :+:   */
+/*   Array.hpp                             	            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebross <alebross@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,21 +19,21 @@ class Array{
 		T*				_elem;
 		unsigned int	_n;
 	public:
-		T 				*getArrayElem(unsigned int i) const{
-			return _elem[i];
-		}
+
 		unsigned int	size(void) const{
 			return _n;
 		}
-		Array(void) : _n = 0, _elem = NULL {
+		Array(void) : _n(1), _elem(new T[_n], _elem[0](0)) {
 			std::cout << "Array created." << std::endl;
 		}
 		Array(unsigned int n) : _elem(new T[n]), _n(n){
+			for(unsigned int i = 0; i < _n; i++)
+				_elem[i] = 0;
 			std::cout << "Array created." << std::endl;
 		}
 		Array(Array const & src) : _elem(new T[src.getLength()]), _n(src.getLength()) {
 			for (unsigned int i = 0; i < _n; i++)
-				_elem[i] = src.getArrayElem(i);
+				_elem[i] = src[i];
 		 	std::cout << "Array copied." << std::endl;
 		}
 		~Array(void) {
@@ -45,9 +45,14 @@ class Array{
 			_n = src.getLength();
 			_elem = new T[_n];
 			for(unsigned int i = 0; i < _n; i++)
-				_elem[i] = src.getArrayElem(i);
+				_elem[i] = src[i];
 			return *this;
 		}
+		T&	operator[](unsigned int i)
+		{
+			if (i >= _n)
+				throw (std::exception());
+			else
+				return (*(_elem + i));
+		}
 };
-
-std::ostream    &operator<<(std::ostream &ostream, const Array &src);
